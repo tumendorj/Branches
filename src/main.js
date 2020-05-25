@@ -6,9 +6,6 @@ Vue.config.productionTip = false
 
 Vue.component('Select2', Select2);
 new Vue({
-  components: {
-    "vue-select": require("vue-select")
-  },
   router,
   render: h => h(App)
 }).$mount('#app')

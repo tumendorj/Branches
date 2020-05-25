@@ -4,6 +4,7 @@ import Create from "../views/Create.vue";
 import Read from "../views/Read.vue";
 import Update from "../views/Update.vue";
 import Delete from "../views/Delete.vue";
+import Form from "../views/Form.vue"
 Vue.use(VueRouter);
 
 const routes = [
@@ -26,6 +27,11 @@ const routes = [
     path: "/delete",
     name: "Delete",
     component: Delete,
+  },
+  {
+    path: "/form",
+    name: "form",
+    component: Form,
   }
 ];
 

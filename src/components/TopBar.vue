@@ -1,15 +1,19 @@
 <template>
   <div id="app">
-    <Topbar />
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+      <div id="nav">
+        <router-link to="/">Create</router-link>|
+        <router-link to="/read">Read</router-link>|
+        <router-link to="/update">Update</router-link>|
+        <router-link to="/delete">Delete</router-link>|
+        <router-link to="/form">Form</router-link>
+      </div>
+    </nav>
+
+    <router-view />
   </div>
 </template>
 <script>
-import Topbar from "./components/TopBar";
-export default {
-  components: {
-    Topbar
-  }
-};
 </script>
 <style lang="scss">
 #app {

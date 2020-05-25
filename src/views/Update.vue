@@ -1,18 +1,45 @@
 <template>
-  <div class="update">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <section id="login">
-      <h2>Update</h2>
-      <div>
-        <Select2 v-model="myValue" :options="myOptions" />
-      </div>
-      <!-- <input type="text" placeholder="Id" v-model="branch.id" /> -->
-      <input type="text" placeholder="Code" v-model="branch.code" />
-      <input type="text" placeholder="Name" v-model="branch.name" />
-      <input type="text" placeholder="Description" v-model="branch.description" />
-      <input type="text" placeholder="ParentId" v-model="branch.parentId" />
-      <button v-on:click="update">Update</button>
-    </section>
+  <div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Icon -->
+      <img alt="Vue logo" src="../assets/logo.png" />
+
+      <!-- Login Form -->
+      <form>
+        <div>
+          <Select2 v-model="myValue" :options="myOptions" />
+        </div>
+        <input
+          type="text"
+          class="fadeIn second"
+          name="name"
+          placeholder="name"
+          v-model="branch.name"
+        />
+        <input
+          type="text"
+          class="fadeIn second"
+          name="code"
+          placeholder="code"
+          v-model="branch.code"
+        />
+        <input
+          type="text"
+          class="fadeIn second"
+          name="description"
+          placeholder="description"
+          v-model="branch.description"
+        />
+        <input
+          type="text"
+          class="fadeIn second"
+          name="parentId"
+          placeholder="parentId"
+          v-model="branch.parentId"
+        />
+        <input type="submit" class="fadeIn fourth" value="submit" @click="update" />
+      </form>
+    </div>
   </div>
 </template>
 <script>
@@ -57,103 +84,280 @@ export default {
 };
 </script>
 <style scoped>
-@import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-html,
-body {
-  width: 100%;
-  height: 100%;
-  margin: 0px;
-  font-family: "Work Sans", sans-serif;
+html {
+  background-color: #56baed;
 }
 
 body {
-  background-image: url("https://images-assets.nasa.gov/image/6900952/6900952~orig.jpg");
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
+  font-family: "Poppins", sans-serif;
+  height: 100vh;
 }
-#branch {
-  height: 50px;
+
+a {
+  color: #92badd;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 400;
 }
-h3 {
-  color: #e0dada;
-  text-align: left;
-}
-section {
-  background-color: rgba(0, 0, 0, 0.72);
-  width: 25%;
-  min-height: 25%;
-  display: flex;
-  flex-direction: column;
-  margin-left: auto;
-  margin-right: auto;
-}
-form {
-  display: flex;
-  flex-direction: column;
-  padding: 15px;
-}
+
 h2 {
-  font-family: "Archivo Black", sans-serif;
-  color: #e0dada;
-  margin-left: auto;
-  margin-right: auto;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: inline-block;
+  margin: 40px 8px 10px 8px;
+  color: #cccccc;
 }
 
-.info {
-  width: 100%;
-  text-align: center;
-  min-height: 45px;
+/* STRUCTURE */
+
+.wrapper {
   display: flex;
+  align-items: center;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  width: 100%;
+  min-height: 100%;
+  padding: 20px;
 }
 
-.info p {
-  margin: auto;
-  padding: 5px;
-}
-.info.good {
-  border: 1px solid #416d50;
-  background-color: #47cf73;
-  color: #416d50;
+#formContent {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: #fff;
+  padding: 30px;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  padding: 0px;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  text-align: center;
 }
 
-input {
-  height: 35px;
-  padding: 5px 5px;
-  margin: 10px 0px;
-  background-color: #e0dada;
-  border: none;
+#formFooter {
+  background-color: #f6f6f6;
+  border-top: 1px solid #dce8f1;
+  padding: 25px;
+  text-align: center;
+  -webkit-border-radius: 0 0 10px 10px;
+  border-radius: 0 0 10px 10px;
 }
-button {
-  height: 40px;
-  padding: 5px 5px;
-  margin: 10px 0px;
-  font-weight: bold;
-  background-color: #be5256;
+
+/* TABS */
+
+h2.inactive {
+  color: #cccccc;
+}
+
+h2.active {
+  color: #0d0d0d;
+  border-bottom: 2px solid #5fbae9;
+}
+
+/* FORM TYPOGRAPHY*/
+
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  background-color: #56baed;
   border: none;
-  color: #e0dada;
-  cursor: pointer;
+  color: white;
+  padding: 15px 80px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 13px;
+  -webkit-box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
+  box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  margin: 5px 20px 40px 20px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+  background-color: #39ace7;
+}
+
+input[type="button"]:active,
+input[type="submit"]:active,
+input[type="reset"]:active {
+  -moz-transform: scale(0.95);
+  -webkit-transform: scale(0.95);
+  -o-transform: scale(0.95);
+  -ms-transform: scale(0.95);
+  transform: scale(0.95);
+}
+
+input[type="text"] {
+  background-color: #f6f6f6;
+  border: none;
+  color: #0d0d0d;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
   font-size: 16px;
-}
-button:hover {
-  background-color: #711f1b;
+  margin: 5px;
+  width: 85%;
+  border: 2px solid #f6f6f6;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
 }
 
-.shake {
-  animation-name: shake;
+input[type="text"]:focus {
+  background-color: #fff;
+  border-bottom: 2px solid #5fbae9;
+}
+
+input[type="text"]:placeholder {
+  color: #cccccc;
+}
+
+/* ANIMATIONS */
+
+/* Simple CSS3 Fade-in-down Animation */
+.fadeInDown {
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+  -webkit-animation-duration: 1s;
   animation-duration: 1s;
-  /*animation-fill-mode: both;*/
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
 }
 
-@media screen and (max-width: 780px) {
-  section {
-    width: 90%;
+@-webkit-keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
   }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+/* Simple CSS3 Fade-in Animation */
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-moz-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  opacity: 0;
+  -webkit-animation: fadeIn ease-in 1;
+  -moz-animation: fadeIn ease-in 1;
+  animation: fadeIn ease-in 1;
+
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-duration: 1s;
+}
+
+.fadeIn.first {
+  -webkit-animation-delay: 0.4s;
+  -moz-animation-delay: 0.4s;
+  animation-delay: 0.4s;
+}
+
+.fadeIn.second {
+  -webkit-animation-delay: 0.6s;
+  -moz-animation-delay: 0.6s;
+  animation-delay: 0.6s;
+}
+
+.fadeIn.third {
+  -webkit-animation-delay: 0.8s;
+  -moz-animation-delay: 0.8s;
+  animation-delay: 0.8s;
+}
+
+.fadeIn.fourth {
+  -webkit-animation-delay: 1s;
+  -moz-animation-delay: 1s;
+  animation-delay: 1s;
+}
+
+/* Simple CSS3 Fade-in Animation */
+.underlineHover:after {
+  display: block;
+  left: 0;
+  bottom: -10px;
+  width: 0;
+  height: 2px;
+  background-color: #56baed;
+  content: "";
+  transition: width 0.2s;
+}
+
+.underlineHover:hover {
+  color: #0d0d0d;
+}
+
+.underlineHover:hover:after {
+  width: 100%;
+}
+
+/* OTHERS */
+
+*:focus {
+  outline: none;
+}
+
+#icon {
+  width: 60%;
 }
 </style>
