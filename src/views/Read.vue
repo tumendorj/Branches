@@ -1,7 +1,6 @@
 <template>
   <div class="read">
-    <h1>information about branches</h1>
-    <button @click="getBranch()" class="button">getBranch</button>
+    <h1>Information about branches</h1>
 
     <table style="width:100%" v-if="branches && branches.length">
       <tr>
@@ -49,6 +48,9 @@ export default {
         }
       );
     }
+  },
+  mounted() {
+    this.getBranch();
   }
 };
 </script>
