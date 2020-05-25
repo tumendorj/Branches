@@ -1,27 +1,12 @@
 <template>
   <div class="update">
     <img alt="Vue logo" src="../assets/logo.png" />
-    <div class="form-horizontal">
-    <div class="form-group">
-      <label for="select1" class="col-sm-3 control-label">
-        A simple select:
-      </label>
-      <div class="col-sm-5">
-        <vue-select class="vue-select1" name="select1" :options="options1" :model.sync="result1">
-        </vue-select>
-      </div>
-      <div class="col-sm-4">
-        <p class="form-control-static">
-          Selected Result: <span class="vue-result1">{{result1}}</span>
-        </p>
-      </div>
-    </div>
-
-    </div>
     <section id="login">
       <h2>Update</h2>
-      <input type="text" placeholder="UpdatingId" v-model="updatingId" />
-      <input type="text" placeholder="Id" v-model="branch.id" />
+      <div>
+        <Select2 v-model="myValue" :options="myOptions" />
+      </div>
+      <!-- <input type="text" placeholder="Id" v-model="branch.id" /> -->
       <input type="text" placeholder="Code" v-model="branch.code" />
       <input type="text" placeholder="Name" v-model="branch.name" />
       <input type="text" placeholder="Description" v-model="branch.description" />
@@ -37,28 +22,42 @@ export default {
   name: "Update",
   data() {
     return {
-      updatingId: "",
+      myValue: "",
+      myOptions: [],
+      branchId: "",
+      branches: new Map(),
       branch: new branch("", "", "", "", "")
     };
   },
   methods: {
     update() {
-      // console.log(
-      //   this.branch.id,
-      //   this.branch.code,
-      //   this.branch.name,
-      //   this.branch.description,
-      //   this.branch.parentId
-      // );
-      //console.log("updated " + this.branch.id + " " + this.updatingId);
-      branchService.updateBranch(this.updatingId, this.branch).then(res => {
+      this.getBykey();
+      this.branch.id = this.branchId;
+      branchService.updateBranch(this.branchId, this.branch).then(res => {
         console.log(res);
       });
+    },
+    getBykey() {
+      for (let [key, value] of this.branches.entries()) {
+        if (value === this.myValue) {
+          this.branchId = key;
+        }
+      }
     }
+  },
+  mounted() {
+    branchService.getBranch().then(res => {
+      Object(res.data).map(element => {
+        this.branches.set(element.id, element.name);
+        this.myOptions.push(element.name);
+      });
+      console.log(this.branches);
+    });
   }
 };
 </script>
 <style scoped>
+@import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 html,
 body {
   width: 100%;
@@ -76,7 +75,13 @@ body {
   align-items: center;
   color: #fff;
 }
-
+#branch {
+  height: 50px;
+}
+h3 {
+  color: #e0dada;
+  text-align: left;
+}
 section {
   background-color: rgba(0, 0, 0, 0.72);
   width: 25%;

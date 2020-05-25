@@ -3,7 +3,10 @@
     <img alt="Vue logo" src="../assets/logo.png" />
     <section id="login">
       <h2>Delete</h2>
-      <input type="text" placeholder="Id" v-model="id" />
+      <div>
+        <Select2 v-model="myValue" :options="myOptions" />
+      </div>
+      <!-- <input type="text" placeholder="Id" v-model="id" /> -->
       <button v-on:click="deleteBranch">Delete</button>
     </section>
   </div>
@@ -14,16 +17,35 @@ export default {
   name: "Delete",
   data() {
     return {
-      id: ""
+      myValue: "",
+      myOptions: [],
+      branches: new Map(),
+      branchId: ""
     };
   },
   methods: {
     deleteBranch() {
-      //console.log(this.id);
-      branchService.deleteBranch(this.id).then(res => {
+      this.getBykey();
+      console.log("branchId " + this.branchId);
+      branchService.deleteBranch(this.branchId).then(res => {
         console.log(res.data);
       });
+    },
+    getBykey() {
+      for (let [key, value] of this.branches.entries()) {
+        if (value === this.myValue) {
+          this.branchId = key;
+        }
+      }
     }
+  },
+  mounted() {
+    branchService.getBranch().then(res => {
+      Object(res.data).map(element => {
+        this.branches.set(element.id, element.name);
+        this.myOptions.push(element.name);
+      });
+    });
   }
 };
 </script>
